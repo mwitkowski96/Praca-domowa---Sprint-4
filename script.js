@@ -1,18 +1,42 @@
-const addTask = document.querySelector(".to-do-list-btn");
+// **Treść zadania:**
 
-console.log(addTask);
+// Utworzyć interaktywną aplikację do zarządzania listą zadań, która umożliwia dodawanie, edytowanie i usuwanie zadań.
 
-addTask.addEventListener("click", () => {
-  const taskDetails = document.getElementById("to-do-list-input").value;
-  if (taskDetails === "") {
-    alert("Pole nie moze byc puste");
+// **Wytyczne:**
+
+// - Dodawanie Zadań:
+//     - Użytkownik wpisuje nazwę zadania w pole tekstowe i dodaje je do listy, klikając przycisk "Dodaj zadanie".
+//     - Jeśli pole tekstowe jest puste, aplikacja wyświetla alert: "Nazwa zadania nie może być pusta."
+//     - Pole tekstowe jest czyszczone po każdym dodaniu zadania.
+// - Edytowanie Zadań:
+//     - Kliknięcie przycisku "Edytuj" obok zadania zamienia nazwę zadania na pole tekstowe, wraz z istniejącą nazwą zadania i umożliwia modyfikację.
+//     - Przycisk "Edytuj" zmienia się na "Zatwierdź zmiany", który służy do zapisania zmienionej nazwy.
+//     - Jeśli pole tekstowe jest puste, edycja nie jest zatwierdzona, a użytkownik widzi alert: "Nazwa zadania nie może być pusta."
+// - **Usuwanie Zadań:**
+//     - Kliknięcie przycisku "Usuń" obok zadania natychmiastowo usuwa zadanie z listy.
+// - **Uwaga:**
+//     - Do wykonania zadania, przydana może okazać się metoda prepend() lub insertBefore() - odszukaj informacji do czego służy i jeśli wystąpi taka konieczność, użyj jej.
+
+// Załadowanie potrzebnych elementów
+const tasksList = document.querySelector(".tasks-list");
+const addTaskBtn = document.querySelector(".to-do-list-btn");
+
+function addNewTask() {
+  const newTask = document.createElement("li");
+  const newTaskValue = document.getElementById("to-do-list-input").value;
+
+  if (newTaskValue != "") {
+    // console.log(newTaskValue);
+    newTask.textContent = newTaskValue;
+    newTask.classList.add("tasks-item");
+    tasksList.appendChild(newTask);
+
+    return;
+
+    // Jeśli pole tekstowe jest puste, aplikacja wyświetla alert: "Nazwa zadania nie może być pusta."
   } else {
-    console.log(taskDetails);
+    alert("Nazwa zadania nie może być pusta.");
   }
-});
+}
 
-// addTask.addEventListener("click", (event) => {
-//   // Wartość jest odczytywana w momencie, gdy coś się zmienia
-//   const taskDetails = event.target.value;
-//   console.log(taskDetails);
-// });
+addTaskBtn.addEventListener("click", addNewTask);
